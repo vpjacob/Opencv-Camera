@@ -6,6 +6,7 @@
 build/
 DerivedData/
 
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -20,6 +21,7 @@ xcuserdata/
 ## Other
 *.moved-aside
 *.xcuserstate
+opencv2.framework
 
 ## Obj-C/Swift specific
 *.hmap

@@ -46,6 +46,7 @@
 		811A47C31E2CA1F5005F7958 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 811A47B91E2CA1F5005F7958 /* SVRadialGradientLayer.m */; };
 		811A47C71E2CB174005F7958 /* UIButton+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 811A47C61E2CB174005F7958 /* UIButton+Addition.m */; };
 		811A47C81E2CB174005F7958 /* UIButton+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 811A47C61E2CB174005F7958 /* UIButton+Addition.m */; };
+		818AE3A01E31BE6800777EA1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818AE39F1E31BE6800777EA1 /* OpenGLES.framework */; };
 		AC25459D1DDC6E1C003223CF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AC25459C1DDC6E1C003223CF /* main.m */; };
 		AC2545A01DDC6E1C003223CF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AC25459F1DDC6E1C003223CF /* AppDelegate.m */; };
 		AC2545A31DDC6E1C003223CF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2545A21DDC6E1C003223CF /* ViewController.m */; };
@@ -117,6 +118,7 @@
 		811A47B91E2CA1F5005F7958 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		811A47C51E2CB174005F7958 /* UIButton+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Addition.h"; sourceTree = "<group>"; };
 		811A47C61E2CB174005F7958 /* UIButton+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Addition.m"; sourceTree = "<group>"; };
+		818AE39F1E31BE6800777EA1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		AC2545981DDC6E1C003223CF /* camera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = camera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC25459C1DDC6E1C003223CF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AC25459E1DDC6E1C003223CF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				818AE3A01E31BE6800777EA1 /* OpenGLES.framework in Frameworks */,
 				811A476C1E2C72D2005F7958 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,12 +226,21 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		818AE39E1E31BE6700777EA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				818AE39F1E31BE6800777EA1 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AC25458F1DDC6E1C003223CF = {
 			isa = PBXGroup;
 			children = (
 				AC25459A1DDC6E1C003223CF /* camera */,
 				AC5799391E246ED500FC8128 /* cameraTests */,
 				AC2545991DDC6E1C003223CF /* Products */,
+				818AE39E1E31BE6700777EA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
