@@ -95,8 +95,6 @@
     //  拍摄完成的图像
     UIImage* _capturePicture;
     
-    
-    
 }
 
 - (void)viewDidLoad {
@@ -154,7 +152,6 @@
 - (IBAction)switchCamera{
     
     [SVProgressHUD show];
-    
     
     ConverseController* converse = [[ConverseController alloc] init];
     
@@ -284,42 +281,36 @@ NSInteger ii = 0;
 #pragma mark - 添加12个红点
 -(void)addpoint{
     
-    NSInteger maxPoint = 13;
+    NSInteger maxPoint = 20;
     
-  
-        
-        for (NSInteger i = 0; i < maxPoint; i++) {
+          for (NSInteger i = 0; i < maxPoint; i++) {
             
             UIView* redview1 = [[UIView alloc] init];
             redview1.backgroundColor = [UIColor redColor];
             
-            UIView* redview2 = [[UIView alloc] init];
-            redview2.backgroundColor = [UIColor redColor];
-            
-            UIView* redview3 = [[UIView alloc] init];
-            redview3.backgroundColor = [UIColor redColor];
+//            UIView* redview2 = [[UIView alloc] init];
+//            redview2.backgroundColor = [UIColor redColor];
+//            
+//            UIView* redview3 = [[UIView alloc] init];
+//            redview3.backgroundColor = [UIColor redColor];
             
             if (i< maxPoint * 0.5) {
                 
                 redview1.frame = CGRectMake(SCREENW * 0.2 + self.preview.bounds.size.width * 0.5 * i, self.preview.bounds.size.height * 0.5, 20, 20);
                 
-                redview2.frame = CGRectMake(SCREENW * 0.2 + self.preview.bounds.size.width * 0.5 * i, 0, 20, 20);
-                
-                redview3.frame = CGRectMake(SCREENW * 0.2 + self.preview.bounds.size.width * 0.5 * i, self.preview.bounds.size.height, 20, 20);
+//                redview2.frame = CGRectMake(SCREENW * 0.2 + self.preview.bounds.size.width * 0.5 * i, 0, 20, 20);
+//                
+//                redview3.frame = CGRectMake(SCREENW * 0.2 + self.preview.bounds.size.width * 0.5 * i, self.preview.bounds.size.height, 20, 20);
                 
                 
                 
             }else{
                 
                 redview1.frame = CGRectMake(SCREENW * 0.2 - self.preview.bounds.size.width * 0.5 * (i - maxPoint * 0.5), self.preview.bounds.size.height * 0.5, 20, 20);
-         
                 
-                
-                redview2.frame = CGRectMake(SCREENW * 0.2 - self.preview.bounds.size.width * 0.5 * (i - maxPoint * 0.5), 0, 20, 20);
-                
-                redview3.frame = CGRectMake(SCREENW * 0.2 - self.preview.bounds.size.width * 0.5 * (i - maxPoint * 0.5), self.preview.bounds.size.height, 20, 20);
-                
-                
+//                redview2.frame = CGRectMake(SCREENW * 0.2 - self.preview.bounds.size.width * 0.5 * (i - maxPoint * 0.5), 0, 20, 20);
+//                
+//                redview3.frame = CGRectMake(SCREENW * 0.2 - self.preview.bounds.size.width * 0.5 * (i - maxPoint * 0.5), self.preview.bounds.size.height, 20, 20);
                 
                 
                 
@@ -332,23 +323,19 @@ NSInteger ii = 0;
                 
             
             
-                //  进行优化，上下各减少三分之一的红点
-                if (i % 2 == 0) {
-                    continue;
-                }
-                
-                
-                [self.preview addSubview:redview2];
-                [self.viewArray addObject:redview2];
-                
-                [self.preview addSubview:redview3];
-                [self.viewArray addObject:redview3];
-                
-             
+//                //  进行优化，上下各减少三分之一的红点
+//                if (i % 2 == 0) {
+//                    continue;
+//                }
+//                
+//                
+//                [self.preview addSubview:redview2];
+//                [self.viewArray addObject:redview2];
+//                
+//                [self.preview addSubview:redview3];
+//                [self.viewArray addObject:redview3];
+              
             
-             
-            
-             
         }
             
         
@@ -476,10 +463,8 @@ NSInteger ii = 0;
 #pragma mark - 设置照片结束的回调方法
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
     
-    
     NSString* msg = (error != nil)?@"保存成功":@"保存失败";
     NSLog(@"%@",msg);
-    
     
     //  静止画面
     //    [self stopCapture];

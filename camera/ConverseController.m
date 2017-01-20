@@ -15,6 +15,7 @@
 
 @interface ConverseController ()<UIScrollViewDelegate>
 
+
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIImage *saveImage;
@@ -28,21 +29,36 @@
     [super viewDidLoad];
 
     
-    [self stitch];
-    
-
-    UIImage* result = [UIImage imageNamed:@""];
-    
-    
 
 }
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    
+    
+    [super viewDidAppear:animated];
+    
+    
+    
+    [self stitch];
+    
+    
+}
+
+
+
+
 -(void)stitch{
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [SVProgressHUD show];
+    
+    NSMutableArray* imageM = [NSMutableArray arrayWithCapacity:self.imageArray.count];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+    
         
-        
-        NSMutableArray* imageM = [NSMutableArray arrayWithCapacity:self.imageArray.count];
+    
         
         CGSize newSize = CGSizeMake(960, 1280);
         
@@ -67,29 +83,29 @@
         
     
         
-//        if (imageM.count == 0) {
-//            [SVProgressHUD showWithStatus:@"数组是空"];
-//            
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                
-//                
-//                
-//                [self exitBtnAction];
-//                
-//                
-//            });
-//            
-//            
-//            return ;
-//        }
-        
+        if (imageM.count == 0) {
+            [SVProgressHUD showWithStatus:@"数组是空"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                
+                
+                [self exitBtnAction];
+                
+                
+            });
+            
+            
+            return ;
+        }
+    
         
         
         //  传入一个图片数组
         UIImage* stitchedImage = [CVWrapper processWithArray:imageM];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
+//        dispatch_async(dispatch_get_main_queue(), ^{
+    
             self.saveImage = stitchedImage;
             
             //  创建一个imageview
@@ -177,11 +193,11 @@
                 
             }];
             
-        });
+//        });
+    
         
         
-        
-    });
+//    });
     
     
     
