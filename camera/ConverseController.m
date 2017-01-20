@@ -53,63 +53,97 @@
     
     [SVProgressHUD show];
     
-    NSMutableArray* imageM = [NSMutableArray arrayWithCapacity:self.imageArray.count];
-    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-    
-        
+    NSMutableArray* imageM1 = [NSMutableArray array];
+    NSMutableArray* imageM2 = [NSMutableArray array];
+    NSMutableArray* imageM3 = [NSMutableArray array];
+    NSMutableArray* imageM4 = [NSMutableArray array];
     
         
         CGSize newSize = CGSizeMake(960, 1280);
         
-        UIImage *scaledImage;
+    
+
         
-        //   循环进行上下文  将图片进行压缩
-        for (NSInteger i = 0; i < self.imageArray.count; i++) {
-            
-            UIGraphicsBeginImageContext(newSize);
-            
-            [self.imageArray[i] drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-            
-            scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-            
-            [imageM addObject:scaledImage];
-            
-            UIGraphicsEndImageContext();
-            
-            
+    [self.imageArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        
+        UIGraphicsBeginImageContext(newSize);
+        
+        [self.imageArray[idx] drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        
+        UIImage * scaledImage= UIGraphicsGetImageFromCurrentImageContext();
+
+
+        
+        //  将可变数组分成4份
+        switch (idx / 4) {
+            case 0:
+                [imageM1 addObject:scaledImage];
+                break;
+            case 1:
+                [imageM2 addObject:scaledImage];
+                break;
+            case 2:
+                [imageM3 addObject:scaledImage];
+                break;
+            case 3:
+                [imageM4 addObject:scaledImage];
+                break;
+            default:
+                break;
         }
         
         
+        
+         UIGraphicsEndImageContext();
+        
+        
+        
+    }];
+
     
-        
-        if (imageM.count == 0) {
-            [SVProgressHUD showWithStatus:@"数组是空"];
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                
-                
-                [self exitBtnAction];
-                
-                
-            });
-            
-            
-            return ;
-        }
     
-        
-        
         //  传入一个图片数组
-        UIImage* stitchedImage = [CVWrapper processWithArray:imageM];
-        
-//        dispatch_async(dispatch_get_main_queue(), ^{
+    NSMutableArray* lastPuzzle = [NSMutableArray array];
     
-            self.saveImage = stitchedImage;
+    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    
+        UIImage* stitchedImage1 = [CVWrapper processWithArray:imageM1];
+        UIImage* stitchedImage2 = [CVWrapper processWithArray:imageM2];
+        UIImage* stitchedImage3 = [CVWrapper processWithArray:imageM3];
+        UIImage* stitchedImage4 = [CVWrapper processWithArray:imageM4];
+        
+        
+//        dispatch_barrier_async(dispatch_get_main_queue(), ^{
+    
+            [lastPuzzle addObject:stitchedImage1];
+            [lastPuzzle addObject:stitchedImage2];
+            [lastPuzzle addObject:stitchedImage3];
+            [lastPuzzle addObject:stitchedImage4];
+            
+            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+    
+               UIImage* image = [CVWrapper processWithArray:lastPuzzle];
+                
+//            });
+//            
+//            
+//        });
+//        
+//        
+//    });
+    
+
+    
+    
+    
+    
+    self.saveImage = image;
             
             //  创建一个imageview
-            self.imageView = [[UIImageView alloc] initWithImage:stitchedImage];
+            self.imageView = [[UIImageView alloc] initWithImage:image];
             
             //注意要设置小了 scroll view  但是将contentsize设置大
             UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENW, SCREENH - 50)];
@@ -143,12 +177,9 @@
                 
                 UIView* btnView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREENH - 50, SCREENW, 50)];
                 
-                
                 btnView.backgroundColor = [UIColor redColor];
                 
                 [self.view addSubview:btnView];
-
-                
                 
                 UIButton* saveBtn = [UIButton button:@"save" fontSize:15 normalColor:[UIColor whiteColor] selectedColor:[UIColor yellowColor]];
                 
